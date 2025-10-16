@@ -28,7 +28,6 @@ function Login() {
   const loginRef = useRef<HTMLDivElement>(null);
   const resetRef = useRef<HTMLDivElement>(null);
   const sendEmailRef = useRef<HTMLDivElement>(null);
-  const sendCodeRef = useRef<HTMLDivElement>(null);
 
   // Login input animation (only runs if there is no reset or sendEmail active)
   useEffect(() => {
@@ -160,9 +159,13 @@ function Login() {
 
   /* ================= API request logic ==============*/
   const handleLogin = () => {
-    localStorage.setItem("role", "warehouse");
-    console.log(`Iniciando sesión: ${email} ${password}`);
-    navigate("/");
+    try {
+      localStorage.setItem("role", "warehouse");
+      console.log(`Iniciando sesión: ${email} ${password}`);
+      navigate("/");
+    } catch {
+      setError("Ha ocurrido un error");
+    }
   };
 
   const handleChangePassword = () => {
@@ -291,7 +294,9 @@ function Login() {
               {Array.from({ length: 5 }).map((_, i) => (
                 <input
                   key={i}
-                  ref={(el) => (otpRefs.current[i] = el)}
+                  ref={(el) => {
+                    otpRefs.current[i] = el;
+                  }}
                   type="text"
                   maxLength={1}
                   className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl text-2xl font-bold text-center border border-gray-400 focus:border-[#7B4B27] outline-none"

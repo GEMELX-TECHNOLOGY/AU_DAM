@@ -4,7 +4,6 @@ import WarehouseHome from "../pages/warehouse/WarehouseHome";
 import { Dashboard } from "../components/Dashboard";
 import { RequireRole } from "./RequireRole.route";
 import { ROLES } from "../data/ROLES";
-import AuthorizerHome from "../pages/authorizer/AuthorizerHome";
 import { RoleRedirect } from "./RoleRedirect.route";
 import UnAuthorized from "../pages/UnAuthorized";
 
@@ -35,7 +34,7 @@ export function AppRoutes() {
       </Route>
 
       {/* ===================== */}
-      {/* ==== RUTAS BASE ===== */}
+      {/* ==== RUTAS WAREHOUSE ===== */}
       {/* ===================== */}
       <Route
         path="/"
@@ -47,16 +46,16 @@ export function AppRoutes() {
       </Route>
 
       {/* ===================== */}
-      {/* ==== RUTAS BASE ===== */}
+      {/* ==== RUTAS AUTHORIZER ===== */}
       {/* ===================== */}
-      <Route
+      {/* <Route
         path="/"
         element={<RequireRole allowedRoles={[ROLES.AUTHORIZER]} />}
       >
         <Route path="/autorizadores" element={<Dashboard />}>
           <Route index element={<AuthorizerHome />} />
         </Route>
-      </Route>
+      </Route> */}
     </Routes>
   );
 }
