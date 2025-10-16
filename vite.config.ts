@@ -16,16 +16,16 @@ export default defineConfig({
         description: "Gestion administrativa de AU DAM FORESTAL",
         theme_color: "#ffffff",
         background_color: "#000000",
-        display: "fullscreen",
-        start_url: "/iniciar-sesion",
+        display: "standalone",
+        start_url: "/",
         icons: [
           {
-            src: "",
+            src: "./logo_audam.avif",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "",
+            src: "./logo_audam.avif",
             sizes: "512x512",
             type: "image/png",
           },
@@ -34,13 +34,24 @@ export default defineConfig({
       workbox: {
         runtimeCaching: [
           {
-            urlPattern: /^http:\/\/localhost:5173\/.*$/, // Patrón para manejar las solicitudes del localhost.
-            handler: "NetworkFirst", // Intenta primero la red y luego la caché.
+            urlPattern: /^https:\/\/api\.tudominio\.com\/.*$/,
+            handler: "NetworkFirst",
             options: {
-              cacheName: "local-cache", // Nombre de la caché para estas solicitudes.
+              cacheName: "api-cache",
               expiration: {
-                maxEntries: 50, // Máximo de recursos en caché.
-                maxAgeSeconds: 86400, // Duración máxima en la caché (1 día).
+                maxEntries: 100,
+                maxAgeSeconds: 3600,
+              },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "google-fonts-cache",
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365,
               },
             },
           },
