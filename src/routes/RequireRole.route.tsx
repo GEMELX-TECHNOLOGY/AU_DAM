@@ -1,6 +1,10 @@
 import { Navigate, Outlet } from "react-router";
 
-export function RequireRole({ allowedRoles }) {
+interface AllowedRoles {
+  allowedRoles: string[];
+}
+
+export function RequireRole({ allowedRoles }: AllowedRoles) {
   const user = localStorage.getItem("role");
 
   if (!user) {
