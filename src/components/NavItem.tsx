@@ -18,6 +18,7 @@ export const NavItem = ({
   icon,
 
   isActive,
+  onClick,
 }: {
   name: string;
 
@@ -26,6 +27,7 @@ export const NavItem = ({
   icon: ReactNode;
 
   isActive: boolean;
+  onClick?: () => void;
 }) => {
   // 1. Crear referencias
 
@@ -99,6 +101,7 @@ export const NavItem = ({
       ref={containerRef}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
+      onClick={onClick}
     >
       <div
         className={clsx(
